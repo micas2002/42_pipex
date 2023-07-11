@@ -6,11 +6,19 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:40:51 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/11 15:12:22 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:22:31 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	store_args(char **argv, t_pipex *pipex)
+{
+	pipex->in_file = ft_strdup(argv[1]);
+	pipex->out_file = ft_strdup(argv[4]);
+	pipex->cmd1 = ft_strdup(argv[2]);
+	pipex->cmd2 = ft_strdup(argv[3]);
+}
 
 int	main(int argc, char **argv)
 {
@@ -24,4 +32,5 @@ int	main(int argc, char **argv)
 	pipex.out_file_fd = open(argv[4], O_WRONLY);
 	if (pipex.out_file_fd == -1)
 		found_error(INV_OUT_FILE);
+	store_args(argv, &pipex);
 }
