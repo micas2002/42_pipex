@@ -6,7 +6,7 @@
 #    By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 14:39:15 by mibernar          #+#    #+#              #
-#    Updated: 2023/07/11 14:47:39 by mibernar         ###   ########.fr        #
+#    Updated: 2023/07/11 15:30:52 by mibernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADERS_LIST = pipex.h
 HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
-SOURCES_LIST = main.c
+SOURCES_LIST = main.c error_handling.c
 SOURCES_DIRECTORY = ./sources/
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 

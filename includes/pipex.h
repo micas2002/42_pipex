@@ -6,13 +6,14 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:41:02 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/11 15:11:53 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:22:41 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include <fcntl.h>
 # include "libft.h"
 
 //errors
