@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   command_paths.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 15:05:27 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/13 15:49:58 by mibernar         ###   ########.fr       */
+/*   Created: 2023/07/13 15:39:36 by mibernar          #+#    #+#             */
+/*   Updated: 2023/07/13 15:40:48 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	found_error(int error)
+char	**get_paths(char **envp)
 {
-	if (error == INV_NUM_ARGS)
-		ft_putstr_fd("Error: Wrong number of arguments.\n", 2);
-	else if (error == INV_IN_FILE)
-		ft_putstr_fd("Error: Input file does not exist.\n", 2);
-	else if (error == INV_OUT_FILE)
-		ft_putstr_fd("Error: Output file does not exist.\n", 2);
-	else if (error == PIPE_ERROR)
-		ft_putstr_fd("Error: Pipe error.\n", 2);
-	exit(1);
+	char	**paths;
+	int		i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		{
+			paths = ft_split(envp[i] + 5, ':');
+			return (paths);
+		}
+		i++;
+	}
+	return (NULL);
 }
