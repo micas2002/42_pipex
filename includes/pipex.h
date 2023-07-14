@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:41:02 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/13 15:56:37 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:14:28 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <stdio.h>
+# include <sys/wait.h>
 # include "libft.h"
 
 //errors
@@ -23,6 +24,7 @@
 # define INV_IN_FILE 2
 # define INV_OUT_FILE 3
 # define PIPE_ERROR 4
+# define FORK_ERROR 5
 
 typedef struct s_pipex
 {
@@ -34,6 +36,8 @@ typedef struct s_pipex
 	char	*in_file;
 	char	*out_file;
 	char	**command_paths;
+	int		pid1;
+	int		pid2;
 }t_pipex;
 
 //main.c

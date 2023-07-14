@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:05:27 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/13 15:49:58 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:00:30 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ void	found_error(int error)
 		ft_putstr_fd("Error: Output file does not exist.\n", 2);
 	else if (error == PIPE_ERROR)
 		ft_putstr_fd("Error: Pipe error.\n", 2);
+	else if (error == FORK_ERROR)
+		ft_putstr_fd("Error: Fork error.\n", 2);
 	exit(1);
 }
