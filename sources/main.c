@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:40:51 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/13 16:44:18 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/16 15:07:03 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	ft_pipex(t_pipex pipex, char **envp)
 		found_error(FORK_ERROR);
 	if (pipex.pid1 == 0)
 	{
+		dup2(pipex.in_file_fd, STDIN_FILENO);
 		dup2(pipex.pipe_fd[1], STDOUT_FILENO);
 		close(pipex.pipe_fd[0]);
-		close(pipex.pipe_fd[1]);
 		cmd1_path = get_cmd_path(pipex.cmd1[0], pipex.command_paths);
 		execve(cmd1_path, pipex.cmd1, envp);
 	}
@@ -53,12 +53,14 @@ void	ft_pipex(t_pipex pipex, char **envp)
 		found_error(FORK_ERROR);
 	if (pipex.pid2 == 0)
 	{
+		dup2(pipex.out_file_fd, STDOUT_FILENO);
 		dup2(pipex.pipe_fd[0], STDIN_FILENO);
-		close(pipex.pipe_fd[0]);
 		close(pipex.pipe_fd[1]);
 		cmd2_path = get_cmd_path(pipex.cmd2[0], pipex.command_paths);
 		execve(cmd2_path, pipex.cmd2, envp);
 	}
+	close(pipex.pipe_fd[0]);
+	close(pipex.pipe_fd[1]);
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
 }
