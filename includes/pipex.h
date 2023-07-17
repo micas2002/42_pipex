@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:41:02 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/16 14:22:50 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:43:43 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,11 @@ void	found_error(int error);
 //command_paths.c
 
 char	**get_paths(char **envp);
+char	*get_cmd_path(char *command, char **command_paths);
+
+//child_processes.c
+
+void	child_one(t_pipex pipex, char **envp);
+void	child_two(t_pipex pipex, char **envp);
 
 #endif

@@ -6,59 +6,25 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:40:51 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/16 15:07:03 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:44:12 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*get_cmd_path(char *command, char **command_paths)
-{
-	char	*command_path;
-	int		i;
-
-	i = 0;
-	while (command_paths[i])
-	{
-		command_path = ft_strjoin(command_paths[i], "/");
-		command_path = ft_strjoin(command_path, command);
-		if (access(command_path, F_OK) == 0)
-			return (command_path);
-		free(command_path);
-		i++;
-	}
-	return (NULL);
-}
-
 void	ft_pipex(t_pipex pipex, char **envp)
 {
-	char	*cmd1_path;
-	char	*cmd2_path;
-
 	pipex.command_paths = get_paths(envp);
 	pipex.pid1 = fork();
 	if (pipex.pid1 == -1)
 		found_error(FORK_ERROR);
 	if (pipex.pid1 == 0)
-	{
-		dup2(pipex.in_file_fd, STDIN_FILENO);
-		dup2(pipex.pipe_fd[1], STDOUT_FILENO);
-		close(pipex.pipe_fd[0]);
-		cmd1_path = get_cmd_path(pipex.cmd1[0], pipex.command_paths);
-		execve(cmd1_path, pipex.cmd1, envp);
-	}
-
+		child_one(pipex, envp);
 	pipex.pid2 = fork();
 	if (pipex.pid2 == -1)
 		found_error(FORK_ERROR);
 	if (pipex.pid2 == 0)
-	{
-		dup2(pipex.out_file_fd, STDOUT_FILENO);
-		dup2(pipex.pipe_fd[0], STDIN_FILENO);
-		close(pipex.pipe_fd[1]);
-		cmd2_path = get_cmd_path(pipex.cmd2[0], pipex.command_paths);
-		execve(cmd2_path, pipex.cmd2, envp);
-	}
+		child_two(pipex, envp);
 	close(pipex.pipe_fd[0]);
 	close(pipex.pipe_fd[1]);
 	waitpid(pipex.pid1, NULL, 0);
