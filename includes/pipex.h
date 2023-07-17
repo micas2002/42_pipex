@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:41:02 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/17 14:43:43 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:27:56 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define INV_OUT_FILE 3
 # define PIPE_ERROR 4
 # define FORK_ERROR 5
+# define DUP_ERROR 6
+# define EXECUTE_ERROR 7
 
 typedef struct s_pipex
 {

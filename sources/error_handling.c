@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:05:27 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/13 16:00:30 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:27:51 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@ void	found_error(int error)
 		ft_putstr_fd("Error: Pipe error.\n", 2);
 	else if (error == FORK_ERROR)
 		ft_putstr_fd("Error: Fork error.\n", 2);
+	else if (error == DUP_ERROR)
+		ft_putstr_fd("Error: Dup error.\n", 2);
+	else if (error == EXECUTE_ERROR)
+		ft_putstr_fd("Error: Execute error.\n", 2);
 	exit(1);
 }
