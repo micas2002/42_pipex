@@ -6,7 +6,7 @@
 /*   By: mibernar <mibernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 14:40:51 by mibernar          #+#    #+#             */
-/*   Updated: 2023/07/17 19:24:37 by mibernar         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:04:22 by mibernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **envp)
 	pipex.in_file_fd = open(argv[1], O_RDONLY);
 	if (pipex.in_file_fd == -1)
 		found_error(INV_IN_FILE);
-	pipex.out_file_fd = open(argv[4], O_WRONLY);
+	pipex.out_file_fd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (pipex.out_file_fd == -1)
 		found_error(INV_OUT_FILE);
 	store_args(argv, &pipex);
